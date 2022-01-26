@@ -1,5 +1,11 @@
+const {App, ExpressReceiver, WorkflowStep} = require("@slack/bolt");
+
+const {surveyBlocks} = require("./blocks/survey");
+const {surveyModal} = require("./blocks/survey-modal");
+
 require('dotenv').config()
-const {App, ExpressReceiver, WorkflowStep} = require('@slack/bolt');
+const SURVEY_MODAL_VIEW = 'survey_modal'
+
 
 const receiver = new ExpressReceiver({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -24,54 +30,72 @@ receiver.router.post('/survey', async (req, res) => {
     await app.client.chat.postMessage({
         token: app.client.token,
         channel: process.env.DEFAULT_CHANNEL,
-        text: 'test survey'
+        blocks: surveyBlocks()
     });
 
-    await res.send('OK');
+    await res.status(200).send('OK');
+});
+
+app.action('open_survey_modal', async ({ack, body, client, logger}) => {
+    await ack();
+
+    try {
+        const result = await client.views.open({
+            trigger_id: body.trigger_id,
+            view: surveyModal(SURVEY_MODAL_VIEW)
+        });
+        logger.info(result);
+    } catch (error) {
+        logger.error(error);
+    }
+});
+
+app.view(SURVEY_MODAL_VIEW, async ({ack, body, view, client, logger}) => {
+    await ack({response_action: "clear"});
 });
 
 // custom workflow step
-const ws = new WorkflowStep('send_survey', {
-    edit: async ({ack, step, configure}) => {
-        await ack();
-
-        const blocks = [
-            {
-                "type": "section",
-                "text": {
-                    "type": "plain_text",
-                    "text": "Send survey for daily scrum meeting.",
-                    "emoji": true
-                }
-            }
-        ];
-
-        await configure({blocks})
-    },
-    save: async ({ack, step, update}) => {
-        await ack();
-
-        const inputs = {}
-        const outputs = []
-
-        await update({inputs, outputs});
-    },
-    execute: async ({step, complete, fail}) => {
-        await app.client.chat.postMessage({
-            token: app.client.token,
-            channel: process.env.DEFAULT_CHANNEL,
-            text: 'test survey'
-        });
-
-        const outputs = {}
-
-        await complete({ outputs });
-    },
-});
+// const ws = new WorkflowStep('send_survey', {
+//     edit: async ({ack, step, configure}) => {
+//         await ack();
+//
+//         const blocks = [
+//             {
+//                 "type": "section",
+//                 "text": {
+//                     "type": "plain_text",
+//                     "text": "Send survey for daily scrum meeting.",
+//                     "emoji": true
+//                 }
+//             }
+//         ];
+//
+//         await configure({blocks})
+//     },
+//     save: async ({ack, step, update}) => {
+//         await ack();
+//
+//         const inputs = {}
+//         const outputs = []
+//
+//         await update({inputs, outputs});
+//     },
+//     execute: async ({step, complete, fail}) => {
+//         await app.client.chat.postMessage({
+//             token: app.client.token,
+//             channel: process.env.DEFAULT_CHANNEL,
+//             text: 'test survey'
+//         });
+//
+//         const outputs = {}
+//
+//         await complete({ outputs });
+//     },
+// });
 
 (async () => {
     // set workflow step
-    app.step(ws);
+    // app.step(ws);
 
     // アプリを起動します
     await app.start(process.env.PORT || 3000);
