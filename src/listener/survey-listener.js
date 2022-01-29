@@ -1,5 +1,6 @@
 const {surveyBlocks} = require("../blocks/survey");
 const {surveyModal} = require("../blocks/survey-modal");
+const {surveyCreateJson} = require("../blocks/surveyCreate.js");
 const Survey = require("../model/survey-model");
 const {insertTo, findFrom} = require("../db-util");
 const { v4: uuidv4 } = require("uuid");
@@ -21,6 +22,20 @@ exports.getSendSurvey = (app) => {
         await res.status(200).send('OK');
     }
 };
+
+exports.getReportSurvey = (app) =>{
+  return async(req,res)=>{
+    await app.client.chat.postMessage({
+            token: app.client.token,
+            channel: process.env.DEFAULT_CHANNEL,
+            blocks: await surveyCreateJson()
+    })
+    // postmessageのresponse値をｄｂに入れる
+    await res.status(200).send('OK');
+    console.log(res.json())
+    
+  }
+}
 
 exports.openSurveyModal = async ({ack, body, client, logger}) => {
     await ack();
