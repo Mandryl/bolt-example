@@ -1,10 +1,8 @@
-const {App, ExpressReceiver, WorkflowStep} = require("@slack/bolt");
+const {App, ExpressReceiver} = require("@slack/bolt");
+const {getSendSurvey, openSurveyModal, receiveSurvey, SURVEY_MODAL_VIEW_NAME} = require("./listener/survey-listener");
 
-const {surveyBlocks} = require("./blocks/survey");
-const {surveyModal} = require("./blocks/survey-modal");
-
+const dbUtil = require("./db-util")
 require('dotenv').config()
-const SURVEY_MODAL_VIEW = 'survey_modal'
 
 
 const receiver = new ExpressReceiver({
@@ -12,47 +10,18 @@ const receiver = new ExpressReceiver({
     logLevel: 'debug',
 });
 
-// ボットトークンとソケットモードハンドラーを使ってアプリを初期化します
 const app = new App({
     logLevel: 'debug',
     token: process.env.SLACK_BOT_TOKEN,
-    // appToken: process.env.SLACK_APP_TOKEN,
-    // socketMode: true,
     receiver
 });
 
-app.message('hello', async ({message, say}) => {
-    await say(`Hey there <@${message.user}>!`);
-});
-
 // custom endpoint for posting survey
-receiver.router.post('/survey', async (req, res) => {
-    await app.client.chat.postMessage({
-        token: app.client.token,
-        channel: process.env.DEFAULT_CHANNEL,
-        blocks: surveyBlocks()
-    });
+receiver.router.post('/survey', getSendSurvey(app));
 
-    await res.status(200).send('OK');
-});
+app.action('open_survey_modal', openSurveyModal);
 
-app.action('open_survey_modal', async ({ack, body, client, logger}) => {
-    await ack();
-
-    try {
-        const result = await client.views.open({
-            trigger_id: body.trigger_id,
-            view: surveyModal(SURVEY_MODAL_VIEW)
-        });
-        logger.info(result);
-    } catch (error) {
-        logger.error(error);
-    }
-});
-
-app.view(SURVEY_MODAL_VIEW, async ({ack, body, view, client, logger}) => {
-    await ack({response_action: "clear"});
-});
+app.view(SURVEY_MODAL_VIEW_NAME, receiveSurvey);
 
 // custom workflow step
 // const ws = new WorkflowStep('send_survey', {
@@ -97,7 +66,8 @@ app.view(SURVEY_MODAL_VIEW, async ({ack, body, view, client, logger}) => {
     // set workflow step
     // app.step(ws);
 
-    // アプリを起動します
+    await dbUtil.init();
+
     await app.start(process.env.PORT || 3000);
 
     console.log('⚡️ Bolt app is running!');

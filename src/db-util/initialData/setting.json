@@ -1,0 +1,18 @@
+[
+    {
+        "item_name":"post_channel_id",
+        "value":"sample"
+    },
+    {
+        "item_name":"member_group_id",
+        "value":"sample-group"
+    },
+    {
+        "item_name":"master_user",
+        "value":["keisuke.kitamura@ibm.com"]
+    },
+    {
+        "item_name":"meeting_time_msec",
+        "value":"10000"
+    }
+]
