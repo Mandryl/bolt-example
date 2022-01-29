@@ -15,6 +15,7 @@
     "start": "node src/app.js"
   },
   "dependencies": {
+    "@google-cloud/scheduler": "^2.3.0",
     "@slack/bolt": "^3.9.0",
     "dotenv": "^14.3.0",
     "nedb": "^1.8.0",
