@@ -1,0 +1,18 @@
+{
+    "type": "context",
+    "elements": [
+        {
+            "type": "mrkdwn",
+            "text": "Submitted by"
+        },
+        {
+            "type": "image",
+            "image_url": "https://ca.slack-edge.com/E27SFGS2W-WHJUJ3DFF-ae2b7aafd2fa-512",
+            "alt_text": "SLACK_NAME"
+        },
+        {
+            "type": "mrkdwn",
+            "text": "*SLACK_NAME_MENTION*"
+        }
+    ]
+}
