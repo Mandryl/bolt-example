@@ -1,0 +1,160 @@
+[
+	{
+		"type": "header",
+		"text": {
+			"type": "plain_text",
+			"text": "Daily Scrum Servey Report",
+			"emoji": true
+		}
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "*Report 1*"
+		}
+	},
+	{
+		"type": "divider"
+	},
+	{
+		"type": "context",
+		"elements": [
+			{
+				"type": "mrkdwn",
+				"text": "Submitted by"
+			},
+			{
+				"type": "image",
+				"image_url": "https://ca.slack-edge.com/E27SFGS2W-WHJUJ3DFF-ae2b7aafd2fa-512",
+				"alt_text": "Tomonobu Sembokuya"
+			},
+			{
+				"type": "mrkdwn",
+				"text": "*<@tomonobu.sembokuya>*"
+			}
+		]
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "*Today's plan*\n"
+		}
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "This is a mrkdwn section block :ghost: *this is bold*, and ~this is crossed out~, and <https://google.com|this is a link>"
+		}
+	},
+	{
+		"type": "actions",
+		"elements": [
+			{
+				"type": "button",
+				"text": {
+					"type": "plain_text",
+					"text": "View Details",
+					"emoji": true
+				},
+				"value": "view_detail",
+				"action_id": "actionId-0"
+			}
+		]
+	},
+	{
+		"type": "context",
+		"elements": [
+			{
+				"type": "image",
+				"image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
+				"alt_text": "placeholder"
+			}
+		]
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "*Report 2*"
+		}
+	},
+	{
+		"type": "divider"
+	},
+	{
+		"type": "context",
+		"elements": [
+			{
+				"type": "mrkdwn",
+				"text": "Submitted by"
+			},
+			{
+				"type": "image",
+				"image_url": "https://ca.slack-edge.com/E27SFGS2W-WHN5E17V3-162f9b738b9e-512",
+				"alt_text": "Keisuke Kitamura"
+			},
+			{
+				"type": "mrkdwn",
+				"text": "*<@keisuke.kitamura>*"
+			}
+		]
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "*Today's plan*\n"
+		}
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "This is a mrkdwn section block :ghost: *this is bold*, and ~this is crossed out~, and <https://google.com|this is a link>"
+		}
+	},
+	{
+		"type": "actions",
+		"elements": [
+			{
+				"type": "button",
+				"text": {
+					"type": "plain_text",
+					"text": "View Details",
+					"emoji": true
+				},
+				"value": "view_detail",
+				"action_id": "actionId-0"
+			}
+		]
+	},
+	{
+		"type": "context",
+		"elements": [
+			{
+				"type": "image",
+				"image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
+				"alt_text": "placeholder"
+			}
+		]
+	},
+	{
+		"type": "actions",
+		"elements": [
+			{
+				"type": "button",
+				"text": {
+					"type": "plain_text",
+					"text": "Start Daily Scrum",
+					"emoji": true
+				},
+				"value": "start_daily_scrum",
+				"action_id": "actionId-0",
+				"style": "primary"
+			}
+		]
+	}
+]

@@ -1,0 +1,16 @@
+{
+    "type": "actions",
+    "elements": [
+        {
+            "type": "button",
+            "text": {
+                "type": "plain_text",
+                "text": "Start Daily Scrum",
+                "emoji": true
+            },
+            "value": "start_daily_scrum",
+            "action_id": "actionId-ACTION_ID",
+            "style": "primary"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "type": "actions",
+    "elements": [
+        {
+            "type": "button",
+            "text": {
+                "type": "plain_text",
+                "text": "View Details",
+                "emoji": true
+            },
+            "value": "view_detail",
+            "action_id": "actionId-ACTIONID"
+        }
+    ]
+}
