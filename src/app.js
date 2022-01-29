@@ -18,7 +18,7 @@ const app = new App({
 
 // custom endpoint for posting survey
 receiver.router.post('/survey', getSendSurvey(app));
-receiver.router.post('/surveyreport', getReportSurvey(app));
+receiver.router.post('/survey-report', getReportSurvey(app));
 
 
 app.action('open_survey_modal', openSurveyModal);
