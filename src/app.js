@@ -1,8 +1,8 @@
 const {App, ExpressReceiver} = require("@slack/bolt");
-const {getReportSurvey,getSendSurvey, openSurveyModal, receiveSurvey, SURVEY_MODAL_VIEW_NAME} = require("./listener/survey-listener");
+const {getReportSurvey, getSendSurvey, openSurveyModal, receiveSurvey, SURVEY_MODAL_VIEW_NAME} = require("./listener/survey-listener");
 
 const dbUtil = require("./db-util")
-const {openSettingsModal} = require("./listener/app-home-listener");
+// const {openSettingsModal} = require("./listener/app-home-listener");
 require("dotenv").config()
 
 
@@ -23,10 +23,9 @@ receiver.router.post('/survey-report', getReportSurvey(app));
 
 app.action("open_survey_modal", openSurveyModal);
 
-
 app.view(SURVEY_MODAL_VIEW_NAME, receiveSurvey);
 
-app.action("open_settings", openSettingsModal);
+// app.action("open_settings", openSettingsModal);
 
 // custom workflow step
 // const ws = new WorkflowStep("send_survey", {
