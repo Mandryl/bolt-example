@@ -1,5 +1,5 @@
 const {App, ExpressReceiver} = require("@slack/bolt");
-const {getSendSurvey, openSurveyModal, receiveSurvey, SURVEY_MODAL_VIEW_NAME} = require("./listener/survey-listener");
+const {getReportSurvey,getSendSurvey, openSurveyModal, receiveSurvey, SURVEY_MODAL_VIEW_NAME} = require("./listener/survey-listener");
 
 const dbUtil = require("./db-util")
 require('dotenv').config()
@@ -18,8 +18,11 @@ const app = new App({
 
 // custom endpoint for posting survey
 receiver.router.post('/survey', getSendSurvey(app));
+receiver.router.post('/surveyreport', getReportSurvey(app));
+
 
 app.action('open_survey_modal', openSurveyModal);
+
 
 app.view(SURVEY_MODAL_VIEW_NAME, receiveSurvey);
 

@@ -9,7 +9,7 @@
                 "emoji": true
             },
             "value": "start_daily_scrum",
-            "action_id": "actionId-0",
+            "action_id": "CALL-ID1",
             "style": "primary"
         }
     ]
