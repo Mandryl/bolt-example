@@ -30,11 +30,12 @@ exports.surveyModal = (callbackId) => {
                 type: "divider"
             },
             {
+                block_id: "report_yesterday",
                 type: "input",
                 element: {
                     type: "plain_text_input",
                     multiline: true,
-                    action_id: "plain_text_input-action"
+                    action_id: "report_yesterday"
                 },
                 label: {
                     type: "plain_text",
@@ -43,11 +44,12 @@ exports.surveyModal = (callbackId) => {
                 }
             },
             {
+                block_id: "report_today",
                 type: "input",
                 element: {
                     type: "plain_text_input",
                     multiline: true,
-                    action_id: "plain_text_input-action"
+                    action_id: "report_today"
                 },
                 label: {
                     type: "plain_text",
@@ -56,11 +58,12 @@ exports.surveyModal = (callbackId) => {
                 }
             },
             {
+                block_id: "report_impediment",
                 type: "input",
                 element: {
                     type: "plain_text_input",
                     multiline: true,
-                    action_id: "plain_text_input-action"
+                    action_id: "report_impediment"
                 },
                 label: {
                     type: "plain_text",
@@ -72,9 +75,10 @@ exports.surveyModal = (callbackId) => {
                 type: "divider"
             },
             {
+                block_id: "report_health",
                 type: "input",
                 element: {
-                    type: "checkboxes",
+                    type: "radio_buttons",
                     options: [
                         {
                             text: {
@@ -100,7 +104,8 @@ exports.surveyModal = (callbackId) => {
                             },
                             value: "bad"
                         }
-                    ]
+                    ],
+                    "action_id": "report_health"
                 },
                 label: {
                     type: "plain_text",
