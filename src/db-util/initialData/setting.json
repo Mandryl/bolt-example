@@ -1,23 +1,5 @@
 [
     {
-<<<<<<< HEAD
-        "item_name":"post_channel_id",
-        "value":"sample"
-    },
-    {
-        "item_name":"member_group_id",
-        "value":"sample-group"
-    },
-    {
-        "item_name":"master_user",
-        "value":["keisuke.kitamura@ibm.com"]
-    },
-    {
-        "item_name":"meeting_time_msec",
-        "value":"10000"
-    }
-]
-=======
         "channel_id": "C02ULFH38ET",
         "member_group_id": "test",
         "scrum_master_user_id": "U021D63SPM2",
@@ -48,4 +30,3 @@
         "call_api_secret": ""
     }
 ]
->>>>>>> 370d2eab95d03b1c95e0da4af3937c37ad3eeedc

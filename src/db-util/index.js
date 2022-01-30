@@ -1,4 +1,4 @@
-const NeDB = require("nedb");
+const nedb = require("nedb");
 const db = {};
 const path = require("path");
 
@@ -8,7 +8,7 @@ module.exports.init = async () => {
 };
 
 const insertInitialData = (tableName) => {
-  db[tableName] = new NeDB();
+  db[tableName] = new nedb();
   const data = require(path.join(__dirname, "initialData", tableName));
   data.forEach((d) => {
     db[tableName].insert(d);
@@ -72,15 +72,63 @@ module.exports.removeFrom = async (tableName, query) => {
   }
 };
 
-module.exports.settingOf = async (itemName) =>{
-    if (itemName) {
+module.exports.settingOf = (channelID) => {
+  if (channelID) {
+    return {
+      set: async (item) => {
         return new Promise((resolve, reject) => {
-            db.setting.find({item_name:itemName},(error, docs)=>{
-                if(error) reject(error);
-                else resolve(docs[0].value);
-            });
+          const updateDoc = {...item};
+          updateDoc.channel_id = channelID;
+
+          db.setting.update(
+            { channel_id: channelID },
+            { $set: updateDoc },
+            { upsert: true,
+              returnUpdatedDocs: true },
+            (error, numAffected, affectedDocuments) => {
+              if (error) reject(error);
+              else resolve(affectedDocuments);
+            }
+          );
         });
-    }else{
-        return null;
-    }
-}
+      },
+      setAll: async (docs) => {
+        return new Promise((resolve, reject) => {
+          const updateDoc = {...docs};
+          updateDoc.channel_id = channelID;
+
+          db.setting.update(
+            { channel_id: channelID },
+            updateDoc,
+            { 
+              upsert: true,
+              returnUpdatedDocs: true 
+            },
+            (error, numAffected, affectedDocuments) => {
+              if (error) reject(error);
+              else resolve(affectedDocuments);
+            }
+          );
+        });
+      },
+      get: async (item) => {
+        return new Promise((resolve, reject) => {
+          db.setting.findOne({ channel_id: channelID }, (error, doc) => {
+            if (error) reject(error);
+            else resolve(doc[item]);
+          });
+        });
+      },
+      getAll: async () => {
+        return new Promise((resolve, reject) => {
+          db.setting.findOne({ channel_id: channelID }, (error, doc) => {
+            if (error) reject(error);
+            else resolve(doc);
+          });
+        });
+      },
+    };
+  } else {
+    return null;
+  }
+};
