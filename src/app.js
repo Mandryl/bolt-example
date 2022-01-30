@@ -22,6 +22,7 @@ receiver.router.post('/survey', getSendSurvey(app));
 receiver.router.post('/survey-report', getReportSurvey(app));
 
 app.action("open_survey_modal", openSurveyModal);
+app.action("actionbtn_id",openReportModal);
 
 app.view(SURVEY_MODAL_VIEW_NAME, receiveSurvey);
 

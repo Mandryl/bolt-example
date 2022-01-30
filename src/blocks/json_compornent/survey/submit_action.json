@@ -1,5 +1,6 @@
 {
     "type": "actions",
+    "block_id": "BLOCKID",
     "elements": [
         {
             "type": "button",
@@ -9,7 +10,7 @@
                 "emoji": true
             },
             "value": "view_detail",
-            "action_id": "ACTION1"
+            "action_id": "ACTIONID"
         }
     ]
 }

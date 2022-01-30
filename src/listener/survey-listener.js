@@ -1,6 +1,6 @@
 const {surveyBlocks} = require("../blocks/survey");
 const {surveyModal} = require("../blocks/survey-modal");
-const {surveyCreateJson} = require("../blocks/surveyCreate.js");
+const {surveyCreateJson,surveyModalJson} = require("../blocks/surveyCreate.js");
 const Survey = require("../model/survey-model");
 const {insertTo, findFrom} = require("../db-util");
 const {v4: uuidv4} = require("uuid");
@@ -36,9 +36,23 @@ exports.getReportSurvey = (app) => {
     }
 }
 
+exports.openReportModal = async({payload,ack, body, view,client, logger})=>{
+    await ack();
+    console.log(payload);
+    try {
+        const result = await client.views.open({
+            trigger_id: body.trigger_id,
+            view: await surveyModalJson(payload)
+        });
+        logger.info(result);
+    } catch (error) {
+        logger.error(error);
+    }
+};
+
+
 exports.openSurveyModal = async ({ack, body, client, logger}) => {
     await ack();
-
     try {
         const result = await client.views.open({
             trigger_id: body.trigger_id,

@@ -1,104 +1,104 @@
 {
-    "type": "modal",
-    "title": {
-        "type": "plain_text",
-        "text": "Daily Scrum Support",
-        "emoji": true
-    },
-    "close": {
-        "type": "plain_text",
-        "text": "Close",
-        "emoji": true
-    },
-    "blocks": [
-        {
-            "type": "context",
-            "elements": [
-                {
-                    "type": "mrkdwn",
-                    "text": "Submitted by"
-                },
-                {
-                    "type": "image",
-                    "image_url": "PROFILE_URL",
-                    "alt_text": "DISPLAY_NAME"
-                },
-                {
-                    "type": "mrkdwn",
-                    "text": "DISPLAY_NAME"
-                }
-            ]
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*What have you done since the last daily scrum?*"
-            }
-        },
-        {
-            "type": "divider"
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "REPORT_YESTERDAY"
-            }
-        },
-        {
-            "type": "context",
-            "elements": [
-                {
-                    "type": "image",
-                    "image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
-                    "alt_text": "placeholder"
-                }
-            ]
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*What do you plan to finish today?*"
-            }
-        },
-        {
-            "type": "divider"
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "REPORT_TODAY"
-            }
-        },
-        {
-            "type": "context",
-            "elements": [
-                {
-                    "type": "image",
-                    "image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
-                    "alt_text": "placeholder"
-                }
-            ]
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*Are there any impediments to your progress?*"
-            }
-        },
-        {
-            "type": "divider"
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "REPORT_IMPEDIMENT"
-            }
-        }
-    ]
+	"type": "modal",
+	"title": {
+		"type": "plain_text",
+		"text": "Daily Scrum Support",
+		"emoji": true
+	},
+	"close": {
+		"type": "plain_text",
+		"text": "Close",
+		"emoji": true
+	},
+	"blocks": [
+		{
+			"type": "context",
+			"elements": [
+				{
+					"type": "mrkdwn",
+					"text": "Submitted by"
+				},
+				{
+					"type": "image",
+					"image_url": "PROFILE_URL",
+					"alt_text": "DISPLAY_NAME"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "DISPLAY_NAME"
+				}
+			]
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*What have you done since the last daily scrum?*"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "REPORT_YESTERDAY"
+			}
+		},
+		{
+			"type": "context",
+			"elements": [
+				{
+					"type": "image",
+					"image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
+					"alt_text": "placeholder"
+				}
+			]
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*What do you plan to finish today?*"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "REPORT_TODAY"
+			}
+		},
+		{
+			"type": "context",
+			"elements": [
+				{
+					"type": "image",
+					"image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
+					"alt_text": "placeholder"
+				}
+			]
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*Are there any impediments to your progress?*"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "REPORT_IMPEDIMENT"
+			}
+		}
+	]
 }

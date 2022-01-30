@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "item_name":"post_channel_id",
         "value":"sample"
     },
@@ -16,3 +17,35 @@
         "value":"10000"
     }
 ]
+=======
+        "channel_id": "C02ULFH38ET",
+        "member_group_id": "test",
+        "scrum_master_user_id": "U021D63SPM2",
+        "reminder_time": "09:00",
+        "report_time": "10:00",
+        "meeting_duration_msec": "10000",
+        "call_api_key": "",
+        "call_api_secret": ""
+    },
+    {
+        "channel_id": "C020S7B04K1",
+        "member_group_id": "test",
+        "scrum_master_user_id": "U021D63SPM2",
+        "reminder_time": "09:00",
+        "report_time": "10:00",
+        "meeting_duration_msec": "10000",
+        "call_api_key": "",
+        "call_api_secret": ""
+    },
+    {
+        "channel_id": "C02ULFH38ET",
+        "member_group_id": "test",
+        "scrum_master_user_id": "U021D63SPM2",
+        "reminder_time": "09:00",
+        "report_time": "10:00",
+        "meeting_duration_msec": "10000",
+        "call_api_key": "",
+        "call_api_secret": ""
+    }
+]
+>>>>>>> 370d2eab95d03b1c95e0da4af3937c37ad3eeedc
