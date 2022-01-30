@@ -1,0 +1,14 @@
+[
+    {
+        "channel_id": "C02ULFH38ET",
+        "type": "survey",
+        "job_name": "string",
+        "time": "09:00"
+    },
+    {
+        "channel_id": "C02ULFH38ET",
+        "type": "survey-report",
+        "job_name": "string",
+        "time": "10:30"
+    }
+]

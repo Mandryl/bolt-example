@@ -1,8 +1,8 @@
-const {toSnakeObj} = require("./mode-util");
+const {toSnakeObj, toCamelObj} = require("./model-util");
 
 module.exports = class BaseModel {
-    fromDoc(json) {
-        return Object.assign(this, json);
+    static fromDoc(json) {
+        return Object.assign(this, toCamelObj(json));
     }
 
     toDoc() {

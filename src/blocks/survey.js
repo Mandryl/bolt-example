@@ -1,4 +1,4 @@
-exports.surveyBlocks = () => {
+exports.surveyBlocks = (channelId) => {
     return [
         {
             type: "header",
@@ -17,6 +17,7 @@ exports.surveyBlocks = () => {
         },
         {
             type: "actions",
+            block_id: channelId,
             elements: [
                 {
                     type: "button",

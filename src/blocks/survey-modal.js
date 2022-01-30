@@ -1,5 +1,6 @@
-exports.surveyModal = (callbackId) => {
-    return {
+const {setMetadataToView} = require("../model/message-metadata-model");
+exports.surveyModal = (callbackId, metadata) => {
+    const modal = {
         type: "modal",
         callback_id: callbackId,
         title: {
@@ -122,4 +123,7 @@ exports.surveyModal = (callbackId) => {
             }
         ]
     }
+    setMetadataToView(modal, metadata);
+
+    return modal;
 };

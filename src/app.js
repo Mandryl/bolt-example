@@ -1,5 +1,5 @@
 const {App, ExpressReceiver} = require("@slack/bolt");
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const {
     getReportSurvey,
     getSendSurvey,
@@ -9,17 +9,18 @@ const {
     SURVEY_MODAL_VIEW_NAME
 } = require("./listener/survey-listener");
 const dbUtil = require("./db-util")
-// const {
-//     openSettingsModal,
-//     receiveSettings,
-//     SETTINGS_MODAL_VIEW_NAME
-// } = require("./listener/settings-listener");
+const {
+    openSettingsModal,
+    receiveSettings,
+    SETTINGS_MODAL_VIEW_NAME
+} = require("./listener/settings-listener");
 require("dotenv").config()
 
 const receiver = new ExpressReceiver({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
     logLevel: "debug",
 });
+receiver.router.use(bodyParser.json());
 
 const app = new App({
     logLevel: "debug",
@@ -32,55 +33,13 @@ receiver.router.post('/survey', getSendSurvey(app));
 receiver.router.post('/survey-report', getReportSurvey(app));
 
 app.action("open_survey_modal", openSurveyModal);
-app.action("actionbtn_id",openReportModal);
-
 app.view(SURVEY_MODAL_VIEW_NAME, receiveSurvey);
+app.action("actionbtn_id", openReportModal);
 
-// app.action("open_settings", openSettingsModal);
-
-// custom workflow step
-// const ws = new WorkflowStep("send_survey", {
-//     edit: async ({ack, step, configure}) => {
-//         await ack();
-//
-//         const blocks = [
-//             {
-//                 "type": "section",
-//                 "text": {
-//                     "type": "plain_text",
-//                     "text": "Send survey for daily scrum meeting.",
-//                     "emoji": true
-//                 }
-//             }
-//         ];
-//
-//         await configure({blocks})
-//     },
-//     save: async ({ack, step, update}) => {
-//         await ack();
-//
-//         const inputs = {}
-//         const outputs = []
-//
-//         await update({inputs, outputs});
-//     },
-//     execute: async ({step, complete, fail}) => {
-//         await app.client.chat.postMessage({
-//             token: app.client.token,
-//             channel: process.env.DEFAULT_CHANNEL,
-//             text: "test survey"
-//         });
-//
-//         const outputs = {}
-//
-//         await complete({ outputs });
-//     },
-// });
+app.command("/dss_setting", openSettingsModal);
+app.view(SETTINGS_MODAL_VIEW_NAME, receiveSettings);
 
 (async () => {
-    // set workflow step
-    // app.step(ws);
-
     await dbUtil.init();
 
     await app.start(process.env.PORT || 3000);

@@ -1,5 +1,5 @@
 const toCamel = (str) => {
-    return str.split.map((word, index) => {
+    return str.split("_").map((word, index) => {
         if (index === 0) {
             return word.toLowerCase();
         }
