@@ -52,8 +52,6 @@ const saveSettings = async (body, view) => {
     const channelId = MessageMetadata.fromDoc(JSON.parse(body["view"]["private_metadata"])).channelId;
     const setting = settingOf(channelId);
     await setting.set(settings.toDoc());
-
-    console.log(await setting.getAll());
 };
 
 const updateScheduler = async (body, view) => {

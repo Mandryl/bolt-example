@@ -28,7 +28,7 @@ exports.getReportSurvey = (app) => {
     return async (req, res) => {
         await app.client.chat.postMessage({
             token: app.client.token,
-            channel: process.env.DEFAULT_CHANNEL,
+            channel: req.body["channel_id"],
             blocks: await surveyCreateJson()
         });
         // postmessageのresponse値をｄｂに入れる

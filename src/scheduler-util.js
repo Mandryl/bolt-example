@@ -14,7 +14,7 @@ module.exports.ScheduleType = {
 module.exports.upsertJob = async (channelId, type, time) => {
     const client = new scheduler.CloudSchedulerClient();
 
-    const jobs = await findFrom(JOB_TABLE_NAME, `channel_id = ${channelId} and type = ${type}`);
+    const jobs = await findFrom(JOB_TABLE_NAME, {channel_id: channelId, type: type});
     if (jobs.length > 2) {
         throw new Error(`There are more than 2 jobs(channel_id: ${channelId}, type: ${type})`);
     }
@@ -26,9 +26,9 @@ module.exports.upsertJob = async (channelId, type, time) => {
         // if number of jobs is more than 3, do not create a job
         const existsJobs = await client.listJobs({
             parent: parent
-        })
-        if (existsJobs.length >= 3) {
-            throw new Error(`There are ${existsJobs.length} jobs in GCP`);
+        });
+        if (existsJobs[0].length >= 3) {
+            throw new Error(`There are ${existsJobs[0].length} jobs in GCP`);
         }
 
         // create job
@@ -40,6 +40,7 @@ module.exports.upsertJob = async (channelId, type, time) => {
                     uri: `${process.env.SLACK_BOLT_URL}/${type}`,
                     httpMethod: "POST",
                     body: Buffer.from(JSON.stringify(httpRequest.toDoc())),
+                    headers: {"Content-Type": "application/json"}
                 },
                 schedule: timeStrToCron(time),
                 timeZone: "Asia/Tokyo"
