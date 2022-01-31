@@ -33,10 +33,10 @@ module.exports.homeView = async(client) =>{
         homejson = homejson + teamtitlejson;
         homejson =  homejson + dividerjson;
         
-        let teamtitlejson = JSON.stringify(require(`${FOLDER_COMPONENT_PATH}/home/teaminfo.json`));
-        teamtitlejson = teamtitlejson["block_id"].replace("@@@DATETIME@@@",String(index + 1));
-        teamtitlejson = teamtitlejson["block_id"].replace("XXX",elem[""]);
-        homejson = homejson + teamtitlejson + ',';
+        let teaminfojson = JSON.stringify(require(`${FOLDER_COMPONENT_PATH}/home/teaminfo.json`));
+        teaminfojson = teaminfojson["block_id"].replace("@@@DATETIME@@@",String(index + 1));
+        teaminfojson = teaminfojson["block_id"].replace("XXX",elem[""]);
+        homejson = homejson + teaminfojson + ',';
         
         let teambottanjson = JSON.stringify(require(`${FOLDER_COMPONENT_PATH}/home/bottan.json`));
         teambottanjson = teambottanjson.replace('');

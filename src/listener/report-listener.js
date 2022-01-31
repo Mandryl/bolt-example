@@ -48,8 +48,8 @@ exports.openReportModal = async({payload,ack, body, view,client, logger})=>{
     }
 };
 
-const receiveReport = (surveyid) =>{
-    const mtgid = uuuidv4();
+const receiveReport = async(surveyid) =>{
+    const mtgid = uuidv4();
 
     // get channel
     const survey = await findFrom(SURVEY_TABLE_NAME, {survey_id: surveyid});
@@ -59,22 +59,22 @@ const receiveReport = (surveyid) =>{
         throw new Error(`There are more than 0 survey`);
     }
     else{
-        channel = survey["channel"]
+        let channel = survey["channel"]
     }
 
     // get reporters
     channel = survey["channel"]
-    reporters = []
+    let reporters = []
     const date = new Date().toISOString().split('T')[0];
-    const surveyreporters = await findFrom(SURVEY_TABLE_NAME, {post_date: survey["post_date"], type: type});
+    const surveyreporters = await findFrom(SURVEY_TABLE_NAME, {post_date: survey["post_date"]});
     surveyreporters.forEach((elem,index)=>{
         reporters.append(elem["display_name"])
     })
 
     // get scrummaster
-    const settingdata  = await findFrom(SETTING_TABLE_NAME, {channel_id: channelId, type: type});
+    const settingdata  = await findFrom(SETTING_TABLE_NAME, {channel_id: channelId});
     if (settingdata.length > 2) {
-        throw new Error(`There are more than 2 settings(channel_id: ${channelId}, type: ${type})`);
+        throw new Error(`There are more than 2 settings(channel_id: ${channelId})`);
     }else if(settingdata.length < 0){
         throw new Error(`There are more than 0 setting)`);
     }else{
@@ -82,7 +82,7 @@ const receiveReport = (surveyid) =>{
     }
 
     // get reportUrl(未実装)
-    reporturl = ""
+    let reporturl = ""
     // const settingdata  = await findFrom(JOB_TABLE_NAME, {channel_id: channelId, type: type});
     // if (settingdata.length > 2) {
     //     throw new Error(`There are more than 2 settings(channel_id: ${channelId}, type: ${type})`);
