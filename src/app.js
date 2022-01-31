@@ -15,7 +15,12 @@ const {
 const {
     getReportSurvey,
     openReportModal
-} = require("./listener/report-listener.js")
+} = require("./listener/report-listener.js");
+const {
+    homeView,
+    openHomeModal
+} = require("./listener/home-listener.js")
+
 require("dotenv").config()
 
 
@@ -36,11 +41,13 @@ receiver.router.post('/survey', getSendSurvey(app));
 receiver.router.post('/survey-report', getReportSurvey(app));
 
 app.action("open_survey_modal", openSurveyModal);
+app.action("home_survey_modal", openHomeModal);
 app.view(SURVEY_MODAL_VIEW_NAME, receiveSurvey);
 app.action("actionbtn_id", openReportModal);
-
 app.command("/dss_setting", openSettingsModal);
 app.view(SETTINGS_MODAL_VIEW_NAME, receiveSettings);
+app.event('app_home_opened',homeView);
+
 
 (async () => {
     await dbUtil.init();
