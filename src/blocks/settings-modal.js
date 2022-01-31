@@ -1,6 +1,7 @@
 const {setMetadataToView} = require("../model/message-metadata-model");
+const {msecToMinutesAndSeconds} = require("../time-util");
 
-exports.settingsModal = (callbackId, groups, metadata) => {
+exports.settingsModal = (callbackId, currentSettings, groups, metadata) => {
     const groupSelectOptions = groups.map(group => {
         return {
             text: {
@@ -36,7 +37,7 @@ exports.settingsModal = (callbackId, groups, metadata) => {
                 type: "input",
                 element: {
                     type: "timepicker",
-                    initial_time: "09:00",
+                    initial_time: currentSettings.reminderTime ? currentSettings.reminderTime : "09:00",
                     placeholder: {
                         type: "plain_text",
                         text: "Select time",
@@ -55,7 +56,7 @@ exports.settingsModal = (callbackId, groups, metadata) => {
                 type: "input",
                 element: {
                     type: "timepicker",
-                    initial_time: "10:30",
+                    initial_time: currentSettings.reportTime ? currentSettings.reportTime : "10:30",
                     placeholder: {
                         type: "plain_text",
                         text: "Select time",
@@ -74,7 +75,7 @@ exports.settingsModal = (callbackId, groups, metadata) => {
                 type: "input",
                 element: {
                     type: "timepicker",
-                    initial_time: "15:00",
+                    initial_time: msecToMinutesAndSeconds(currentSettings.meetingDurationMsec ? currentSettings.meetingDurationMsec : "900000"),
                     placeholder: {
                         type: "plain_text",
                         text: "Set duration",
@@ -93,6 +94,7 @@ exports.settingsModal = (callbackId, groups, metadata) => {
                 type: "input",
                 element: {
                     type: "users_select",
+                    initial_user: currentSettings.scrumMasterUserId,
                     action_id: "scrum_master_user_id",
                     placeholder: {
                         type: "plain_text",
@@ -109,6 +111,7 @@ exports.settingsModal = (callbackId, groups, metadata) => {
                 type: "input",
                 element: {
                     type: "static_select",
+                    initial_option: currentSettings.memberGroupHandle,
                     placeholder: {
                         type: "plain_text",
                         text: "Which group do you want to mention?",
@@ -122,10 +125,68 @@ exports.settingsModal = (callbackId, groups, metadata) => {
                     text: "User group",
                     emoji: true
                 }
+            },
+            {
+                type: "actions",
+                block_id: "expand_settings",
+                elements: [
+                    {
+                        type: "button",
+                        text: {
+                            type: "plain_text",
+                            text: "Expand",
+                            emoji: true
+                        },
+                        value: "expand_settings",
+                        action_id: "expand_settings"
+                    }
+                ]
             }
         ]
     }
     setMetadataToView(modal, metadata);
 
     return modal;
+};
+
+exports.expandedSettingsModal = (callbackId, currentSettings, groups, metadata) => {
+    const settingsView = exports.settingsModal(callbackId, currentSettings, groups, metadata);
+    console.log(settingsView);
+    // get settings blocks excluding expand button
+    const settingsBlocks = settingsView.blocks.filter((block) => {
+        return block.block_id !== "expand_settings";
+    });
+    const extraBlocks = [
+        {
+            type: "input",
+            block_id: "call_api_key",
+            element: {
+                type: "plain_text_input",
+                initial_value: currentSettings.callApiKey ? currentSettings.callApiKey : "",
+                action_id: "call_api_key"
+            },
+            label: {
+                type: "plain_text",
+                text: "Zoom API key",
+                emoji: true
+            }
+        },
+        {
+            type: "input",
+            block_id: "call_api_secret",
+            element: {
+                type: "plain_text_input",
+                initial_value: currentSettings.callApiKey ? currentSettings.callApiKey : "",
+                action_id: "call_api_secret"
+            },
+            label: {
+                type: "plain_text",
+                text: "Zoom API secret",
+                emoji: true
+            }
+        }
+    ];
+    settingsView.blocks = settingsBlocks.concat(extraBlocks);
+
+    return settingsView;
 };

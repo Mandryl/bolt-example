@@ -1,7 +1,8 @@
 [
     {
         "channel_id": "C02ULFH38ET",
-        "member_group_id": "test",
+        "member_group_id": "S030KU2QSMC",
+        "member_group_handle": "test",
         "scrum_master_user_id": "U021D63SPM2",
         "reminder_time": "09:00",
         "report_time": "10:00",
@@ -11,7 +12,8 @@
     },
     {
         "channel_id": "C020S7B04K1",
-        "member_group_id": "test",
+        "member_group_id": "S030KU2QSMC",
+        "member_group_handle": "test",
         "scrum_master_user_id": "U021D63SPM2",
         "reminder_time": "09:00",
         "report_time": "10:00",
@@ -21,7 +23,8 @@
     },
     {
         "channel_id": "C02ULFH38ET",
-        "member_group_id": "test",
+        "member_group_id": "S030KU2QSMC",
+        "member_group_handle": "test",
         "scrum_master_user_id": "U021D63SPM2",
         "reminder_time": "09:00",
         "report_time": "10:00",

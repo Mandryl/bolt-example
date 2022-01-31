@@ -10,6 +10,7 @@ const dbUtil = require("./db-util")
 const {
     openSettingsModal,
     receiveSettings,
+    openExpandedSettingsModal,
     SETTINGS_MODAL_VIEW_NAME
 } = require("./listener/settings-listener");
 const {
@@ -40,6 +41,7 @@ app.view(SURVEY_MODAL_VIEW_NAME, receiveSurvey);
 app.action("actionbtn_id", openReportModal);
 
 app.command("/dss_setting", openSettingsModal);
+app.action("expand_settings", openExpandedSettingsModal);
 app.view(SETTINGS_MODAL_VIEW_NAME, receiveSettings);
 
 (async () => {

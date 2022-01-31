@@ -1,5 +1,5 @@
 const UserGroup = require("../model/user-group-model");
-const {settingsModal} = require("../blocks/settings-modal");
+const {settingsModal, expandedSettingsModal} = require("../blocks/settings-modal");
 const MessageMetadata = require("../model/message-metadata-model");
 const Settings = require("../model/settings-model");
 const {minutesAndSecondsToMsec} = require("../time-util");
@@ -12,11 +12,11 @@ const SCRUM_MASTER_USER_ID_ACTION = "scrum_master_user_id";
 const REMINDER_TIME_ACTION = "reminder_time";
 const REPORT_TIME_ACTION = "report_time";
 const MEETING_DURATION_MSEC_ACTION = "meeting_duration";
+const CALL_API_KEY_ACTION = "call_api_key";
+const CALL_API_SECRET_ACTION = "call_api_secret";
 
-exports.openSettingsModal = async ({ack, body, client, context, logger}) => {
-    await ack();
-
-    // create user groups
+const prepareSettingsModal = async (body, client, context) => {
+    // get user groups
     const response = await client.usergroups.list({
         token: context.botToken
     });
@@ -24,12 +24,49 @@ exports.openSettingsModal = async ({ack, body, client, context, logger}) => {
         return new UserGroup(id, handle);
     });
 
-    const metadata = new MessageMetadata(body["channel_id"]);
+    // get current settings
+    // if channel id in body, get from body, else get from private_metadata
+    const channelId = body["channel_id"] ? body["channel_id"] : MessageMetadata.fromDoc(JSON.parse(body["view"]["private_metadata"])).channelId;
+    const settings = settingOf(channelId);
+    let currentSettings = new Settings();
+    try {
+        const currentSettingsDoc = await settings.getAll();
+        currentSettings = Settings.fromDoc(currentSettingsDoc);
+    } catch (_) {  // if there are no settings, ignore error
+    }
+
+    // get channel id as metadata
+    const metadata = new MessageMetadata(channelId);
+
+    return [userGroups, currentSettings, metadata];
+}
+
+exports.openSettingsModal = async ({ack, body, client, context, logger}) => {
+    await ack();
+
+    const [userGroups, currentSettings, metadata] = await prepareSettingsModal(body, client, context);
 
     try {
         const result = await client.views.open({
             trigger_id: body.trigger_id,
-            view: settingsModal(exports.SETTINGS_MODAL_VIEW_NAME, userGroups, metadata)
+            view: settingsModal(exports.SETTINGS_MODAL_VIEW_NAME, currentSettings, userGroups, metadata)
+        });
+        logger.info(result);
+    } catch (error) {
+        logger.error(error);
+    }
+};
+
+exports.openExpandedSettingsModal = async ({ack, body, client, context, logger}) => {
+    await ack();
+
+    const [userGroups, currentSettings, metadata] = await prepareSettingsModal(body, client, context);
+
+    try {
+        const result = await client.views.update({
+            view_id: body.view.id,
+            hash: body.view.hash,
+            view: expandedSettingsModal(exports.SETTINGS_MODAL_VIEW_NAME, currentSettings, userGroups, metadata)
         });
         logger.info(result);
     } catch (error) {
@@ -41,12 +78,22 @@ const saveSettings = async (body, view) => {
     const settings = new Settings();
 
     const blocks = view["state"]["values"];
+    console.log(blocks[MEMBER_GROUP_ID_ACTION][MEMBER_GROUP_ID_ACTION]["selected_option"]);
     settings.reminderTime = blocks[REMINDER_TIME_ACTION][REMINDER_TIME_ACTION]["selected_time"];
     settings.reportTime = blocks[REPORT_TIME_ACTION][REPORT_TIME_ACTION]["selected_time"];
     settings.scrumMasterUserId = blocks[SCRUM_MASTER_USER_ID_ACTION][SCRUM_MASTER_USER_ID_ACTION]["selected_user"];
     settings.memberGroupId = blocks[MEMBER_GROUP_ID_ACTION][MEMBER_GROUP_ID_ACTION]["selected_option"]["value"];
+    settings.memberGroupHandle = blocks[MEMBER_GROUP_ID_ACTION][MEMBER_GROUP_ID_ACTION]["selected_option"]["text"]["text"];
     const meetingDurationStr = blocks[MEETING_DURATION_MSEC_ACTION][MEETING_DURATION_MSEC_ACTION]["selected_time"];
     settings.meetingDurationMsec = minutesAndSecondsToMsec(meetingDurationStr);
+
+    // set expand settings
+    if (CALL_API_KEY_ACTION in blocks) {
+        settings.callApiKey = blocks[CALL_API_KEY_ACTION][CALL_API_KEY_ACTION]["value"];
+    }
+    if (CALL_API_SECRET_ACTION in blocks) {
+        settings.callApiSecret = blocks[CALL_API_SECRET_ACTION][CALL_API_SECRET_ACTION]["value"];
+    }
 
     // get channelId in metadata
     const channelId = MessageMetadata.fromDoc(JSON.parse(body["view"]["private_metadata"])).channelId;
