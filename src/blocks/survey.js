@@ -4,7 +4,7 @@ exports.surveyBlocks = (channelId) => {
             type: "header",
             text: {
                 type: "plain_text",
-                text: "Daily Scrum Support",
+                text: "Daily Scrum Supporter",
                 emoji: true
             }
         },

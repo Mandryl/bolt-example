@@ -2,19 +2,32 @@ const {surveyBlocks} = require("../blocks/survey");
 const {surveyModal} = require("../blocks/survey-modal");
 const {surveyCreateJson,surveyModalJson} = require("../blocks/surveyCreate.js");
 const Report = require("../model/report-model");
-const {insertTo,findFrom} = require("../db-util");
+const {insertTo,findFrom, settingOf} = require("../db-util");
 const {v4: uuidv4} = require("uuid");
+const {dailyScrumStart} = require("../blocks/daily-scrum-start");
 
 const SURVEY_TABLE_NAME = "survey";
 const SETTING_TABLE_NAME = "setting";
 
 exports.getReportSurvey = (app) => {
     return async (req, res) => {
+        const channelId = req.body["channel_id"];
+
         await app.client.chat.postMessage({
             token: app.client.token,
-            channel: req.body["channel_id"],
+            channel: channelId,
             blocks: await surveyCreateJson()
         });
+
+        const setting = settingOf(channelId);
+        await app.client.chat.postEphemeral({
+            token: app.client.token,
+            channel: channelId,
+            user: await setting.get("scrum_master_user_id"),
+            text: "test",
+            blocks: dailyScrumStart(channelId)
+        });
+
         // postmessageのresponse値をｄｂに入れる
         await res.status(200).send('OK');
         console.log(res.json());
@@ -53,7 +66,7 @@ const receiveReport = (surveyid) =>{
     channel = survey["channel"]
     reporters = []
     const date = new Date().toISOString().split('T')[0];
-    const surveyreporters = await findFrom(SURVEY_TABLE_NAME, {post_date: survey["post_date"], type: type});   
+    const surveyreporters = await findFrom(SURVEY_TABLE_NAME, {post_date: survey["post_date"], type: type});
     surveyreporters.forEach((elem,index)=>{
         reporters.append(elem["display_name"])
     })
