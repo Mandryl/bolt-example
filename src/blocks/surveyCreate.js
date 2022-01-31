@@ -1,7 +1,7 @@
 const dbUtil = require("../db-util");
 
 module.exports.surveyModalJson = async(getid) =>{
-  let surveyjson = JSON.stringify(require('./json_compornent/survey/report_detail.json'));
+  	let surveyjson = JSON.stringify(require('./json_compornent/survey/report_detail.json'))+"'['";
 	getid = getid["block_id"].replace("ACTIONID","");
 	const surveyObject = await dbUtil.findFrom("survey",{survey_id:getid});
 	// エラーハンドリングをする
@@ -12,14 +12,14 @@ module.exports.surveyModalJson = async(getid) =>{
 	surveyjson = surveyjson.replace("REPORT_YESTERDAY", surveyObject[0]["report_yesterday"]);
 	surveyjson = surveyjson.replace("REPORT_TODAY", surveyObject[0]["report_today"]);
 	surveyjson = surveyjson.replace("REPORT_IMPEDIMENT", surveyObject[0]["report_impediment"]);
-  console.log(surveyjson = surveyjson.replace("REPORT_IMPEDIMENT", surveyObject[0]["report_impediment"]))
+  	console.log(surveyjson = surveyjson.replace("REPORT_IMPEDIMENT", surveyObject[0]["report_impediment"]))
 	return surveyjson;
 }
 
 module.exports.surveyCreateJson = async() =>{
-  const postdate = new Date().toISOString().split('T')[0];
-  const surveyObject = await dbUtil.findFrom("survey",{post_date:postdate});
-  let surveyjson = '[' +JSON.stringify(require('./json_compornent/survey/header.json')) + ","
+ 	const postdate = new Date().toISOString().split('T')[0];
+  	const surveyObject = await dbUtil.findFrom("survey",{post_date:postdate});
+  	let surveyjson = '[' +JSON.stringify(require('./json_compornent/survey/header.json')) + ","
 
 	if(surveyObject.length == 0){
 		console.log("[Error]. Total report data was zero.");

@@ -1,0 +1,36 @@
+{
+    "type": "actions",
+    "elements": [
+        {
+            "type": "button",
+            "text": {
+                "type": "plain_text",
+                "text": "View Report :open_book:",
+                "emoji": true
+            },
+            "value": "1797PD",
+            "style": "primary",
+            "action_id": "view_report"
+        },
+        {
+            "type": "button",
+            "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Send a message to SM :speech_balloon:"
+            },
+            "style": "danger",
+            "action_id": "deny_request"
+        },
+        {
+            "type": "button",
+            "text": {
+                "type": "plain_text",
+                "text": "Trace Back :footprints:",
+                "emoji": true
+            },
+            "value": "1797PD",
+            "action_id": "trace_back2"
+        }
+    ]
+}

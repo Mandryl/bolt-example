@@ -1,0 +1,7 @@
+{
+    "type": "section",
+    "text": {
+        "type": "mrkdwn",
+        "text": "*:plane: Hey <@UID>, welcome to your Daily Scrum Reports dashboard*\nHere you can check your today's report, manage all reports, and see the history of them."
+    }
+}
