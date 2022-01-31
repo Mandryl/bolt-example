@@ -40,15 +40,15 @@ module.exports.surveyCreateJson = async() =>{
 		surveyjson = surveyjson + cliintjson + ',';
 		// Section 
 		surveyjson = surveyjson + JSON.stringify(require('./json_compornent/survey/submit_section_todays.json')) + ',';
-    // report todays
+    	// report todays
 		let reporttext = JSON.stringify(require('./json_compornent/survey/submit_report.json'));
 		reporttext  = reporttext.replace('SLACK_REPORT_TEXT', elem["report_today"]);
 		surveyjson = surveyjson + reporttext + ',';
 		// report action button(modal)
-    let actionjson = JSON.stringify(require('./json_compornent/survey/submit_action.json'));
-    actionjson = actionjson.replace('ACTIONID', 'actionbtn_id');
+    	let actionjson = JSON.stringify(require('./json_compornent/survey/submit_action.json'));
+    	actionjson = actionjson.replace('ACTIONID', 'actionbtn_id');
 		actionjson = actionjson.replace('BLOCKID', 'ACTIONID'+ elem["survey_id"]);
-    surveyjson = surveyjson + actionjson + ',';
+   		surveyjson = surveyjson + actionjson + ',';
 		surveyjson = surveyjson +JSON.stringify(require('./json_compornent/survey/submit_margin.json'))+ ',';
 		
 		if (surveyObject.length == index + 1){

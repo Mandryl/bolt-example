@@ -1,11 +1,9 @@
 const {App, ExpressReceiver} = require("@slack/bolt");
 const bodyParser = require("body-parser");
 const {
-    getReportSurvey,
     getSendSurvey,
     openSurveyModal,
     receiveSurvey,
-    openReportModal,
     SURVEY_MODAL_VIEW_NAME
 } = require("./listener/survey-listener");
 const dbUtil = require("./db-util")
@@ -14,7 +12,12 @@ const {
     receiveSettings,
     SETTINGS_MODAL_VIEW_NAME
 } = require("./listener/settings-listener");
+const {
+    getReportSurvey,
+    openReportModal
+} = require("./listener/report-listener.js")
 require("dotenv").config()
+
 
 const receiver = new ExpressReceiver({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -41,7 +44,6 @@ app.view(SETTINGS_MODAL_VIEW_NAME, receiveSettings);
 
 (async () => {
     await dbUtil.init();
-
     await app.start(process.env.PORT || 3000);
 
     console.log("⚡️ Bolt app is running!");

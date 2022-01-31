@@ -19,38 +19,9 @@ exports.getSendSurvey = (app) => {
             channel: req.body["channel_id"],
             blocks: surveyBlocks()
         });
-
         await res.status(200).send('OK');
     };
 };
-
-exports.getReportSurvey = (app) => {
-    return async (req, res) => {
-        await app.client.chat.postMessage({
-            token: app.client.token,
-            channel: req.body["channel_id"],
-            blocks: await surveyCreateJson()
-        });
-        // postmessageのresponse値をｄｂに入れる
-        await res.status(200).send('OK');
-        console.log(res.json());
-    }
-}
-
-exports.openReportModal = async({payload,ack, body, view,client, logger})=>{
-    await ack();
-    console.log(payload);
-    try {
-        const result = await client.views.open({
-            trigger_id: body.trigger_id,
-            view: await surveyModalJson(payload)
-        });
-        logger.info(result);
-    } catch (error) {
-        logger.error(error);
-    }
-};
-
 
 exports.openSurveyModal = async ({ack, body, client, logger}) => {
     await ack();
@@ -96,3 +67,4 @@ exports.receiveSurvey = async ({ack, body, view, client, context, logger}) => {
     // insert to db
     await insertTo("survey", survey.toDoc());
 };
+
