@@ -6,21 +6,23 @@ DSS is a Slack App and focuses on managing daily scrums.
 
 There are three features :
 
-### 1.Sending survey forms**
+### 1.Sending survey forms
 
 DSS sends simple forms to team members. They can write down their progresses, plans, and troubles in this form.  
 
-### 2.Publishing reports**
+### 2.Publishing reports
 
 Once all team members have completed their surveys (or the set time comes,) the report including all members' forms is published. It would be used in a daily scrum meeting or for checking progress anytime.  
 
-### 3.Holding daily scrum meetings with keeping time**
+### 3.Holding daily scrum meetings with keeping time
 
 Once Scrum Master starts a meeting, DSS counts 15 minutes (by default, the duration is set to 15 minutes, but you can change it). The duration has passed, where upon the meeting is ended by DSS.
 
 ## Demo
 
 Please see this youtube video.
+
+https://www.youtube.com/watch?v=VNw8h-sL9vc
 
 [![youtube_thumbnail](https://img.youtube.com/vi/VNw8h-sL9vc/0.jpg)](https://www.youtube.com/watch?v=VNw8h-sL9vc)
 
