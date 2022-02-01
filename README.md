@@ -108,7 +108,7 @@ If not set, the value is set to 15 minutes by default.
 
 If the group name is not set, the notification will be sent by @here.
 
-#### 3.Notification of remaining time for Daily Scrume Meeting
+#### 3.Notification of remaining time for Daily Scrum Meeting
 
 If the group name is not set, the notification will be sent to the scrum master by @(scrum-master-usename).
 
