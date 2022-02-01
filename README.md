@@ -86,12 +86,12 @@ When you install this app in a channel, you need to configure them.
 * Remind you to submit your report at: The set time for sending survey in the channel every day.  
 * You need to submit your report by: The set time for sending report in the channel every day.
 * The daily scrum duration (MM:SS): The Duration of daily scrum.  
-* Scrum Master: User of scrum master in the channel.
-* User group: User group for mentions in some messages.
+* Scrum Master: The user assigned as scrum master in the channel.
+* User group: The user group for mentions in some messages.
 
 ### Extra settings
 
-If you want to set up extra settings, you need to tap "Expand" button and configure it.  
+If you want to set up extra settings, you need to tap "Expand" button and configure them.  
 
 * Zoom API Key: API key for Zoom meetings as daily scrum.
 * Zoom API Secret: API secret for Zoom meetings as daily scrum.
