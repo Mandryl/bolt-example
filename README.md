@@ -102,9 +102,9 @@ For more information on how to get API key and API secret, please refer to [here
 
 #### 1.Duration of daily scrum
 
-If not set, the value, 15 minutes is set as the default value.
+If not set, the value is set to 15 minutes by default.
 
-#### 2.Notification of the start of Daily Scrum Meeting
+#### 2.Notification of the start for Daily Scrum Meeting
 
 If the group name is not set, the notification will be sent by @here.
 
