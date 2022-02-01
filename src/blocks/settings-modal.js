@@ -94,7 +94,7 @@ exports.settingsModal = (callbackId, currentSettings, groups, metadata) => {
                 type: "input",
                 element: {
                     type: "users_select",
-                    initial_user: currentSettings.scrumMasterUserId,
+                    initial_user: currentSettings.scrumMasterUserId ? currentSettings.scrumMasterUserId : "",
                     action_id: "scrum_master_user_id",
                     placeholder: {
                         type: "plain_text",
@@ -111,7 +111,6 @@ exports.settingsModal = (callbackId, currentSettings, groups, metadata) => {
                 type: "input",
                 element: {
                     type: "static_select",
-                    initial_option: currentSettings.memberGroupHandle,
                     placeholder: {
                         type: "plain_text",
                         text: "Which group do you want to mention?",

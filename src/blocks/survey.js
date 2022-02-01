@@ -1,4 +1,4 @@
-exports.surveyBlocks = (channelId) => {
+exports.surveyBlocks = (channelId, groupId) => {
     return [
         {
             type: "header",
@@ -12,7 +12,7 @@ exports.surveyBlocks = (channelId) => {
             type: "section",
             text: {
                 type: "mrkdwn",
-                text: "Jot down and share your progress !"
+                text: `<!subteam^${groupId}>\nJot down and share your progress !`
             }
         },
         {

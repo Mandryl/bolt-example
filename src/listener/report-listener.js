@@ -24,7 +24,7 @@ exports.getReportSurvey = (app) => {
             token: app.client.token,
             channel: channelId,
             user: await setting.get("scrum_master_user_id"),
-            text: "test",
+            text: "",
             blocks: dailyScrumStart(channelId)
         });
 
