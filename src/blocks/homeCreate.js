@@ -1,4 +1,4 @@
-const getChannelName = require("../channel-util");
+const getChannelName = require("../listener/channel-util");
 const {findFrom} = require("../db-util");
 const SETTING_TABLE_NAME = "setting";
 const REPORT_TABLE_NAME = "report";
