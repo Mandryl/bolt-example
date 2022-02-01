@@ -5,7 +5,7 @@ exports.surveyModal = (callbackId, metadata) => {
         callback_id: callbackId,
         title: {
             type: "plain_text",
-            text: "Daily Scrum Support",
+            text: "Daily Scrum Supporter",
             emoji: true
         },
         submit: {

@@ -2,7 +2,7 @@ const {surveyBlocks} = require("../blocks/survey");
 const {surveyModal} = require("../blocks/survey-modal");
 const {surveyCreateJson,surveyModalJson} = require("../blocks/surveyCreate.js");
 const Survey = require("../model/survey-model");
-const {insertTo} = require("../db-util");
+const {insertTo, settingOf} = require("../db-util");
 const {v4: uuidv4} = require("uuid");
 const MessageMetadata = require("../model/message-metadata-model");
 
@@ -14,10 +14,14 @@ const REPORT_HEALTH_ACTION = 'report_health';
 
 exports.getSendSurvey = (app) => {
     return async (req, res) => {
+        const channelId = req.body["channel_id"];
+        const setting = settingOf(channelId);
+        const memberGroupId = await setting.get("member_group_id");
+
         await app.client.chat.postMessage({
             token: app.client.token,
             channel: req.body["channel_id"],
-            blocks: surveyBlocks()
+            blocks: surveyBlocks(channelId, memberGroupId)
         });
         await res.status(200).send('OK');
     };
