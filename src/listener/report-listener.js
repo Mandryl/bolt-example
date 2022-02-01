@@ -8,11 +8,13 @@ const {dailyScrumStart} = require("../blocks/daily-scrum-start");
 
 const SURVEY_TABLE_NAME = "survey";
 const SETTING_TABLE_NAME = "setting";
+const REPORT_TABLE_NAME = "report";
 
 exports.getReportSurvey = (app) => {
     return async (req, res) => {
-        const channelId = req.body["channel_id"];
-
+        // const channelId = req.body["channel_id"];
+        const channelId = "C02ULFH38ET";
+      
         await app.client.chat.postMessage({
             token: app.client.token,
             channel: channelId,
@@ -24,7 +26,7 @@ exports.getReportSurvey = (app) => {
             token: app.client.token,
             channel: channelId,
             user: await setting.get("scrum_master_user_id"),
-            text: "",
+            text: "test",
             blocks: dailyScrumStart(channelId)
         });
 
@@ -34,13 +36,13 @@ exports.getReportSurvey = (app) => {
     }
 }
 
-exports.openReportModal = async({payload,ack, body, view,client, logger})=>{
+exports.openReportModal = async({payload,ack, context,body, view,client, logger})=>{
     await ack();
     console.log(payload);
     try {
         const result = await client.views.open({
             trigger_id: body.trigger_id,
-            view: await surveyModalJson(payload)
+            view: await surveyModalJson(payload,client,context)
         });
         logger.info(result);
     } catch (error) {
@@ -50,7 +52,8 @@ exports.openReportModal = async({payload,ack, body, view,client, logger})=>{
 
 const receiveReport = async(surveyid) =>{
     const mtgid = uuidv4();
-
+    let channelId = ""
+    let channel = ""
     // get channel
     const survey = await findFrom(SURVEY_TABLE_NAME, {survey_id: surveyid});
     if (survey.length > 2) {
@@ -59,7 +62,7 @@ const receiveReport = async(surveyid) =>{
         throw new Error(`There are more than 0 survey`);
     }
     else{
-        let channel = survey["channel"]
+        channel = survey["channel"]
     }
 
     // get reporters
@@ -70,8 +73,12 @@ const receiveReport = async(surveyid) =>{
     surveyreporters.forEach((elem,index)=>{
         reporters.append(elem["display_name"])
     })
+    
+    // get date
+    let postdate = date;
 
     // get scrummaster
+    let scrummaster = []
     const settingdata  = await findFrom(SETTING_TABLE_NAME, {channel_id: channelId});
     if (settingdata.length > 2) {
         throw new Error(`There are more than 2 settings(channel_id: ${channelId})`);
@@ -91,7 +98,8 @@ const receiveReport = async(surveyid) =>{
     // }else{
     //     scrummaster = settingdata[""]
     // }
-
-    const report = new Report(mtgid,reporturl,channel,scrummaster,reporters);
-    await insertTo(JOB_TABLE_NAME, report.toDoc());
+    
+    
+    const report = new Report(mtgid,reporturl,channel,scrummaster,reporters,postdate);
+    await insertTo(REPORT_TABLE_NAME, report.toDoc());
 }
