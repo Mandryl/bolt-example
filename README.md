@@ -71,7 +71,7 @@ You can also set environment variables by adding a .env file directly under the 
 
 ## Usage
 
-After installing the app in your workspace, add it to the channels you want to use as well.
+After installing the app in your workspace, add it to the channels in which you want to use.
 
 For more information, please refer to the following document
 
@@ -81,7 +81,7 @@ For more information, please refer to the following document
 
 ### Settings
 
-When you install this app in a channel, you need to configure it.
+When you install this app in a channel, you need to configure them.
 
 * Remind you to submit your report at: Time of sending survey in the channel every day.  
 * You need to submit your report by: Time of sending report in the channel every day.
