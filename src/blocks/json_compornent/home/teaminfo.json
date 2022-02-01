@@ -1,0 +1,12 @@
+{
+    "type": "section",
+    "text": {
+        "type": "mrkdwn",
+        "text": "Scrum Master: *XXX*\nDate: @@@DATETIME@@@"
+    },
+    "accessory": {
+        "type": "image",
+        "image_url": "SCRUMURL",
+        "alt_text": "user_image_*"
+    }
+}

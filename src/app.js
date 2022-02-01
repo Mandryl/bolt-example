@@ -19,7 +19,8 @@ const {
 } = require("./listener/report-listener.js");
 const {
     homeView,
-    openHomeModal
+    openHomeModal,
+    openDetailReportModal
 } = require("./listener/home-listener.js")
 const calls = require("./listener/calls/calls");
 const {initialSettingsBlocks} = require("./blocks/initial-settings");
@@ -54,7 +55,7 @@ app.action("expand_settings", openExpandedSettingsModal);
 app.view(SETTINGS_MODAL_VIEW_NAME, receiveSettings);
 app.event('app_home_opened',homeView);
 app.event("member_joined_channel", initializeSettings);
-
+app.action("modalbtn_id", openDetailReportModal);
 (async () => {
     await dbUtil.init();
     await app.start(process.env.PORT || 3000);

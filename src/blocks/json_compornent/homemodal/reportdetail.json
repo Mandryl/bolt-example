@@ -1,17 +1,16 @@
 {
     "type": "actions",
-    "block_id": "HOME_BLOCKID_HOMEID",
+    "block_id": "VIEWDETAIL_ID",
     "elements": [
         {
             "type": "button",
             "text": {
                 "type": "plain_text",
-                "text": "View Report :open_book:",
+                "text": "View Details",
                 "emoji": true
             },
-            "value": "1797PD",
-            "style": "primary",
-            "action_id": "home_survey_modal"
+            "value": "view_detail",
+            "action_id": "EVENT_ID"
         }
     ]
 }

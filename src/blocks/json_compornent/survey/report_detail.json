@@ -2,7 +2,7 @@
 	"type": "modal",
 	"title": {
 		"type": "plain_text",
-		"text": "Daily Scrum Support",
+		"text": "Daily Scrum Supporter",
 		"emoji": true
 	},
 	"close": {
@@ -21,11 +21,11 @@
 				{
 					"type": "image",
 					"image_url": "PROFILE_URL",
-					"alt_text": "DISPLAY_NAME"
+					"alt_text": "prof"
 				},
 				{
 					"type": "mrkdwn",
-					"text": "DISPLAY_NAME"
+					"text": "USERID"
 				}
 			]
 		},
