@@ -83,9 +83,9 @@ For more information, please refer to the following document
 
 When you install this app in a channel, you need to configure them.
 
-* Remind you to submit your report at: Time of sending survey in the channel every day.  
-* You need to submit your report by: Time of sending report in the channel every day.
-* The daily scrum duration (MM:SS): Duration of daily scrum.  
+* Remind you to submit your report at: The set time for sending survey in the channel every day.  
+* You need to submit your report by: The set time for sending report in the channel every day.
+* The daily scrum duration (MM:SS): The Duration of daily scrum.  
 * Scrum Master: User of scrum master in the channel.
 * User group: User group for mentions in some messages.
 
