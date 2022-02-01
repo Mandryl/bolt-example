@@ -102,20 +102,20 @@ For more information on how to get API key and API secret, please refer to [here
 
 ### Additional information about the setting values
 
-#### **Duration of daily scrum**
+#### [Duration of daily scrum]
 
 If not set, 15 minutes will be used as the default value.
 
-#### **Notification of the start of Daily Scrum Meeting**
+#### [Notification of the start of Daily Scrum Meeting]
 
 If the group name is not set, the notification will be sent by @here.
 
-#### **Notification of remaining time for Daily Scrume Meeting**
+#### [Notification of remaining time for Daily Scrume Meeting]
 
 If the group name is not set, the notification will be sent to the scrum master by @(scrum-master-usename).
 
 If the scrum master is not registered, it will be notified by @here.
 
-#### **Zoom API key and API secret**
+#### [Zoom API key and API secret]
 
 You can also set it in `Process.env.ZOOM_API_KEY`, but this setting takes precedence.
