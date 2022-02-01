@@ -32,7 +32,7 @@ https://www.youtube.com/watch?v=VNw8h-sL9vc
 
 [Bolt](https://github.com/slackapi/bolt-js) is used in the backend of the Slack App and requires the Bot User OAuth Access Token and Signing Secret for the Slack App.
 
-Please refer to [Bolt's start guide](https://slack.dev/bolt-js/tutorial/getting-started) for information on how to obtain these.
+Please refer to [Bolt's start guide](https://slack.dev/bolt-js/tutorial/getting-started) for information on how to obtain them.
 
 After obtaining the two values, set the environment variables as follows.
 
@@ -43,20 +43,20 @@ export SLACK_SIGNING_SECRET=<your-signing-secret>
 
 ### Google Cloud Platform
 
-This app use [Google Cloud Scheduler](https://cloud.google.com/scheduler) for scheduling sending some messages.
+This app uses [Google Cloud Scheduler](https://cloud.google.com/scheduler) for scheduling events which send some messages.
 
 You need to set up Google Cloud Platform credentials.
 
-Set an environment variable as following.
+Set an environment variable as follows.
 (See [the official documentation](https://cloud.google.com/docs/authentication/production) for details.)
 
 ```shell
 export GOOGLE_APPLICATION_CREDENTIALS=authentication.json
 ```
 
-And, you need to configure Google Cloud Scheduler instances information.
+Also, you need to configure Google Cloud Scheduler instances information.
 
-Set an environment variable as following. `GCP_LACATION_ID` is such as asia-northeast1.
+Set an environment variable as follows. `GCP_LACATION_ID` is such as asia-northeast1.
 
 ```shell
 export GCP_PROJECT_ID=your-project-id
