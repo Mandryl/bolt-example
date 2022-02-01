@@ -116,4 +116,4 @@ If the scrum master is not registered, the notification is sent by @here.
 
 #### 4.Zoom API key and API secret
 
-You can also set them in `Process.env.ZOOM_API_KEY` and `Process.env.ZOOM_API_SECRET`, but the setting values take precedence over process.env.
+You can also set them in `Process.env.ZOOM_API_KEY` and `Process.env.ZOOM_API_SECRET`, but the setting values take precedence over `process.env`.
