@@ -190,6 +190,7 @@ dist
 .pnp.*
 
 **/.DS_Store
+.history
 
 # Glitch
 package-lock.json

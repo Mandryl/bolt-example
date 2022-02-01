@@ -21,6 +21,7 @@ const {
     homeView,
     openHomeModal
 } = require("./listener/home-listener.js")
+const calls = require("./listener/calls/calls");
 
 require("dotenv").config()
 
@@ -43,6 +44,7 @@ receiver.router.post('/survey-report', getReportSurvey(app));
 
 app.action("open_survey_modal", openSurveyModal);
 app.action("home_survey_modal", openHomeModal);
+app.action("start_daily_scrum", calls);
 app.view(SURVEY_MODAL_VIEW_NAME, receiveSurvey);
 app.action("actionbtn_id", openReportModal);
 app.command("/dss_setting", openSettingsModal);
