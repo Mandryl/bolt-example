@@ -26,7 +26,8 @@ const listener = async ({ ack, client, body }) => {
   const meetingMsg = msgUtil.meeting(callAddRes.call.id);
   await chat.post(meetingMsg.text, meetingMsg.blocks);
 
-  const meetingDuration = setting.meeting_duration_msec;
+  const meetingDuration 
+  = setting.meeting_duration_msec ? setting.meeting_duration_msec : 900000;
   const notifyTimes = notify(meetingDuration);
   notifyTimes.forEach((nt) => {
     const notifyMsg = msgUtil.notify(nt.half, nt.remain);
