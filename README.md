@@ -6,19 +6,15 @@ DSS is a Slack App and focuses on managing daily scrums.
 
 There are three features :
 
-1. Sending survey forms
-2. Publishing reports
-3. Holding daily scrum meetings with keeping time
-
-### **Sending survey forms**
+### 1.Sending survey forms**
 
 DSS sends simple forms to team members. They can write down their progresses, plans, and troubles in this form.  
 
-### **Publishing reports**
+### 2.Publishing reports**
 
 Once all team members have completed their surveys (or the set time comes,) the report including all members' forms is published. It would be used in a daily scrum meeting or for checking progress anytime.  
 
-### **Holding daily scrum meetings with keeping time**
+### 3.Holding daily scrum meetings with keeping time**
 
 Once Scrum Master starts a meeting, DSS counts 15 minutes (by default, the duration is set to 15 minutes, but you can change it). The duration has passed, where upon the meeting is ended by DSS.
 
@@ -102,20 +98,20 @@ For more information on how to get API key and API secret, please refer to [here
 
 ### Additional information about the setting values
 
-#### [Duration of daily scrum]
+#### 1.Duration of daily scrum
 
 If not set, 15 minutes will be used as the default value.
 
-#### [Notification of the start of Daily Scrum Meeting]
+#### 2.Notification of the start of Daily Scrum Meeting
 
 If the group name is not set, the notification will be sent by @here.
 
-#### [Notification of remaining time for Daily Scrume Meeting]
+#### 3.Notification of remaining time for Daily Scrume Meeting
 
 If the group name is not set, the notification will be sent to the scrum master by @(scrum-master-usename).
 
 If the scrum master is not registered, it will be notified by @here.
 
-#### [Zoom API key and API secret]
+#### 4.Zoom API key and API secret
 
 You can also set it in `Process.env.ZOOM_API_KEY`, but this setting takes precedence.
