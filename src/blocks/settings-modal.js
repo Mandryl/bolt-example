@@ -94,7 +94,6 @@ exports.settingsModal = (callbackId, currentSettings, groups, metadata) => {
                 type: "input",
                 element: {
                     type: "users_select",
-                    initial_user: currentSettings.scrumMasterUserId ? currentSettings.scrumMasterUserId : "",
                     action_id: "scrum_master_user_id",
                     placeholder: {
                         type: "plain_text",
