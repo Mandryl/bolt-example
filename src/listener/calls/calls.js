@@ -1,4 +1,4 @@
-const dbUtil = require("../../dbUtil");
+const dbUtil = require("../../db-util");
 const zoom = require("../../zoom");
 
 const message = require("./message");

@@ -11,7 +11,7 @@ const {
     openSettingsModal,
     receiveSettings,
     openExpandedSettingsModal,
-    SETTINGS_MODAL_VIEW_NAME
+    SETTINGS_MODAL_VIEW_NAME, initializeSettings
 } = require("./listener/settings-listener");
 const {
     getReportSurvey,
@@ -22,6 +22,7 @@ const {
     openHomeModal
 } = require("./listener/home-listener.js")
 const calls = require("./listener/calls/calls");
+const {initialSettingsBlocks} = require("./blocks/initial-settings");
 
 require("dotenv").config()
 
@@ -48,10 +49,11 @@ app.action("start_daily_scrum", calls);
 app.view(SURVEY_MODAL_VIEW_NAME, receiveSurvey);
 app.action("actionbtn_id", openReportModal);
 app.command("/dss_setting", openSettingsModal);
+app.action("initial_settings", openSettingsModal);
 app.action("expand_settings", openExpandedSettingsModal);
 app.view(SETTINGS_MODAL_VIEW_NAME, receiveSettings);
 app.event('app_home_opened',homeView);
-
+app.event("member_joined_channel", initializeSettings);
 
 (async () => {
     await dbUtil.init();

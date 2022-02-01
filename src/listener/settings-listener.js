@@ -5,6 +5,7 @@ const Settings = require("../model/settings-model");
 const {minutesAndSecondsToMsec} = require("../time-util");
 const {settingOf} = require("../db-util");
 const {upsertJob, ScheduleType} = require("../scheduler-util");
+const {initialSettingsBlocks} = require("../blocks/initial-settings");
 
 exports.SETTINGS_MODAL_VIEW_NAME = 'settings_modal';
 const MEMBER_GROUP_ID_ACTION = "member_group_id";
@@ -14,6 +15,18 @@ const REPORT_TIME_ACTION = "report_time";
 const MEETING_DURATION_MSEC_ACTION = "meeting_duration";
 const CALL_API_KEY_ACTION = "call_api_key";
 const CALL_API_SECRET_ACTION = "call_api_secret";
+
+exports.initializeSettings =async ({body, client, context}) => {
+    if (body.event.user === context.botUserId) {
+        await client.chat.postEphemeral({
+            token: context.botToken,
+            channel: body.event.channel,
+            user: body.event.inviter,
+            text: "",
+            blocks: initialSettingsBlocks()
+        });
+    }
+};
 
 const prepareSettingsModal = async (body, client, context) => {
     // get user groups
@@ -26,7 +39,18 @@ const prepareSettingsModal = async (body, client, context) => {
 
     // get current settings
     // if channel id in body, get from body, else get from private_metadata
-    const channelId = body["channel_id"] ? body["channel_id"] : MessageMetadata.fromDoc(JSON.parse(body["view"]["private_metadata"])).channelId;
+    let channelId;
+    if ("channel_id" in body) {
+        // from /dss_setting
+        channelId = body["channel_id"];
+    } else if ("view" in body && "private_metadata" in body["view"]) {
+        // from expand_settings
+        channelId = MessageMetadata.fromDoc(JSON.parse(body["view"]["private_metadata"])).channelId;
+    } else {
+        // from initial_settings
+        channelId = body["channel"]["id"];
+    }
+
     const settings = settingOf(channelId);
     let currentSettings = new Settings();
     try {
@@ -39,7 +63,7 @@ const prepareSettingsModal = async (body, client, context) => {
     const metadata = new MessageMetadata(channelId);
 
     return [userGroups, currentSettings, metadata];
-}
+};
 
 exports.openSettingsModal = async ({ack, body, client, context, logger}) => {
     await ack();
