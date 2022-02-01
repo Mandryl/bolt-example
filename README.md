@@ -100,7 +100,7 @@ For more information on how to get API key and API secret, please refer to [here
 
 ### Additional information about the setting values
 
-#### 1.Duration of daily scrum
+#### 1.The Duration of daily scrum
 
 If not set, the value is set to 15 minutes by default.
 
