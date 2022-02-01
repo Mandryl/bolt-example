@@ -2,6 +2,6 @@
     "type": "section",
     "text": {
         "type": "mrkdwn",
-        "text": "*Last but not least... When you attend a mtg, check the ground rule!*\n :one: If you have a task, you must attend.\n :two: Only those who have tasks can speak.\n :three: Speak to the team.\n :four: No side conversations.\n :five: Discuss problems after the meeting."
+        "text": "*When you attend a mtg, check the ground rule!*\n :one: If you have a task, you must attend.\n :two: Only those who have tasks can speak.\n :three: Speak to the team.\n :four: No side conversations.\n :five: Discuss problems after the meeting."
     }
 }

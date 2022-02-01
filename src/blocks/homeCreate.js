@@ -27,9 +27,10 @@ module.exports.homeView = async(payload,context,client,body) =>{
   
     // get setting-reporters
     // const repoters  = await findFrom(REPORT_TABLE_NAME, {reporters: payload["user"]});
-    const repoters = await findFrom(REPORT_TABLE_NAME, {$or:[{reporters: { $elemMatch : payload["user"]}},{scrummasteruser_id:payload["user"]}]});
-
-    if (repoters.length <= 0) {
+    const reporters = await findFrom(REPORT_TABLE_NAME, {$or:[{reporters: { $elemMatch : payload["user"]}},{scrummasteruser_id:payload["user"]}]});
+    console.log(reporters);
+    
+    if (reporters.length <= 0) {
         console.log(`There are more than 0 setting`);
         homejson = homejson + placeholder + ',';
         homejson = homejson + rolejson + ']}';
@@ -37,16 +38,19 @@ module.exports.homeView = async(payload,context,client,body) =>{
     }
     
     const channelSet = new Set();
-    repoters.forEach((el)=>{
+    reporters.forEach((el)=>{
       channelSet.add(el["channel_id"]);
     });
-
+    console.log(channelSet);
+    console.log("--------");
     let datelist = [];
     channelSet.forEach((el)=>{
-        let uniqRepoters = repoters.filter((re)=> el== re["channel_id"]);
+        let uniqRepoters = reporters.filter((re)=> el=== re["channel_id"]);
         const newdateReport = uniqRepoters.reduce((report1,report2)=>(moment(report1["post_date"]).isAfter(report2["post_date"]) ? report1 : report2));
+        console.log(newdateReport);
         datelist.push({channel_id:el,date:newdateReport["post_date"]});
     });
+    console.log(datelist);
     
     let index = 0;
     for(const elem of datelist){
@@ -98,7 +102,8 @@ module.exports.detailModal = async(body) =>{
 }
 
 module.exports.reportModal = async(payload,body) =>{
-    const repoters  = await findFrom(REPORT_TABLE_NAME, {reporters: { $elemMatch : body["user"]["id"] }});
+    // const repoters  = await findFrom(REPORT_TABLE_NAME, {reporters: { $elemMatch : body["user"]["id"] }});
+    const repoters = await findFrom(REPORT_TABLE_NAME, {$or:[{reporters: { $elemMatch : body["user"]["id"]}},{scrummasteruser_id:body["user"]["id"]}]});
     let chennelId = ""
     
     if (repoters.length <= 0) {

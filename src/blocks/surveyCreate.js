@@ -39,6 +39,8 @@ module.exports.surveyCreateJson = async() =>{
 		let cliintjson = JSON.stringify(require('./json_compornent/survey/submit_client.json'));
 		cliintjson = cliintjson.replace('SLACK_NAME', elem["display_name"]);
 		cliintjson = cliintjson.replace('SLACK_NAME_MENTION', elem["display_name"]);
+    cliintjson = cliintjson.replace('SLACK_ICON', elem["profile_url"]);
+    
 		surveyjson = surveyjson + cliintjson + ',';
 		// Section 
 		surveyjson = surveyjson + JSON.stringify(require('./json_compornent/survey/submit_section_todays.json')) + ',';
@@ -58,5 +60,7 @@ module.exports.surveyCreateJson = async() =>{
 		}
 
 	})
-	return surveyjson;
+	
+  return surveyjson;
+  
 }
