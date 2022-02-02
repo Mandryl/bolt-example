@@ -69,6 +69,16 @@ In addition, [dotenv](https://github.com/motdotla/dotenv) is used in the backend
 
 You can also set environment variables by adding a .env file directly under the `/src` folder.
 
+
+### Appendix: Slack app manifests
+
+You can install Daily Scrum Supporter with app manifests, `app-manifests.yml`. 
+
+When you use the app manifest, you must replace `$HOST` with the hostname of your slack bot. 
+
+For more information, visit the [Slack official documents](https://api.slack.com/future/development/manifests).
+
+
 ## Usage
 
 After installing the app in your workspace, add it to the channels in which you want to use.

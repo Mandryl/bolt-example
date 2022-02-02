@@ -1,0 +1,40 @@
+_metadata:
+  major_version: 1
+  minor_version: 1
+display_information:
+  name: Daily Scrum Supporter
+  description: Daily Scrum Supporter (DSS) can manage your daily scrums. It sends short surveys, creates reports, and holds meetings.
+  background_color: "#1d7c00"
+settings:
+  socket_mode_enabled: false
+  interactivity:
+    is_enabled: true
+    request_url: https://$HOST/slack/events
+  event_subscriptions:
+    request_url: https://$HOST/slack/events
+    bot_events:
+      - app_home_opened
+      - member_joined_channel
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: false
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: dss
+  slash_commands:
+    - command: /dss_setting
+      description: Configure Daily Scrum Support in this channel.
+      usage_hint: ""
+      url: https://$HOST/slack/events
+oauth_config:
+  scopes:
+    bot:
+      - commands
+      - calls:write
+      - channels:read
+      - chat:write
+      - groups:read
+      - usergroups:read
+      - users.profile:read
+      - incoming-webhook
