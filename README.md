@@ -22,9 +22,9 @@ Once Scrum Master starts a meeting, DSS counts 15 minutes (by default, the durat
 
 Please see this youtube video.
 
-https://www.youtube.com/watch?v=VNw8h-sL9vc
+https://www.youtube.com/watch?v=hgeV8mSlsSc
 
-[![youtube_thumbnail](https://img.youtube.com/vi/VNw8h-sL9vc/0.jpg)](https://www.youtube.com/watch?v=VNw8h-sL9vc)
+[![youtube_thumbnail](https://img.youtube.com/vi/hgeV8mSlsSc/0.jpg)](https://www.youtube.com/watch?v=hgeV8mSlsSc)
 
 ## Install
 
