@@ -67,7 +67,7 @@ export GCP_LOCATION_ID=your-location
 
 In addition, [dotenv](https://github.com/motdotla/dotenv) is used in the backend.
 
-You can also set environment variables by adding a .env file directly under the `/src` folder.
+You can also set environment variables by adding a .env file directly under the project root folder.
 
 
 ### Appendix: Slack app manifests
