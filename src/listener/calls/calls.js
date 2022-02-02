@@ -7,10 +7,10 @@ const chatUtil = require("./chat");
 
 const listener = async ({ ack, client, body }) => {
   await ack();
-
-  const channelID = body.channel_id;
+  
+  const channelID = body.container.channel_id;
   const setting = await dbUtil.settingOf(channelID).getAll();
-
+  
   const meeting = zoom(setting);
   const msgUtil = message(setting);
   const chat = chatUtil(client, channelID);

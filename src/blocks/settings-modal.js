@@ -47,7 +47,7 @@ exports.settingsModal = (callbackId, currentSettings, groups, metadata) => {
                 },
                 label: {
                     type: "plain_text",
-                    text: "Remind you to submit your report at",
+                    text: "Send a survey form at",
                     emoji: true
                 }
             },
@@ -66,7 +66,7 @@ exports.settingsModal = (callbackId, currentSettings, groups, metadata) => {
                 },
                 label: {
                     type: "plain_text",
-                    text: "You need to submit your report by",
+                    text: "Daily Scrum starts at (and you need to submit your report by)",
                     emoji: true
                 }
             },
@@ -85,7 +85,7 @@ exports.settingsModal = (callbackId, currentSettings, groups, metadata) => {
                 },
                 label: {
                     type: "plain_text",
-                    text: "The daily scrum duration (MM:SS)",
+                    text: "The duration of daily scrum (MM:SS)",
                     emoji: true
                 }
             },

@@ -31,5 +31,16 @@
         "meeting_duration_msec": "10000",
         "call_api_key": "",
         "call_api_secret": ""
+    },
+    {
+        "channel_id": "C030ZR1E80N",
+        "member_group_id": "S030KU2QSMC",
+        "member_group_handle": "test",
+        "scrum_master_user_id": "U02USHR6AQJ",
+        "reminder_time": "09:00",
+        "report_time": "10:00",
+        "meeting_duration_msec": "10000",
+        "call_api_key": "",
+        "call_api_secret": ""
     }
 ]

@@ -54,10 +54,12 @@ exports.receiveSurvey = async ({ack, body, view, client, context, logger}) => {
     survey.channelId = metadata.channelId;
 
     // get user display name
+    const userId = body["user"]["id"];
     const profile = await client.users.profile.get({
         token: context.botToken,
-        user: body["user"]["id"]
+        user: userId
     });
+    survey.userId = userId;
     survey.displayName = profile["profile"]["display_name"];
     survey.profileUrl = profile["profile"]["image_512"];
 
